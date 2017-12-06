@@ -212,25 +212,25 @@ void wdt_c_handler()
   if (count == 15) {
     mlAdvance(&ml0, &fieldFence);
     u_int switches = p2sw_read();
-    if(switches && 0){
+    if(switches & 0){
     	  ml0.velocity.axes[1] = -4;
         redrawScreen = 1;
         mlAdvance(&ml0, &fieldFence);
     	  movLayerDraw(&ml0,&layer0);
     	}
-    	if(switches && 1){
+    	if(switches & 1){
     	  ml0.velocity.axes[1] = 4;
         redrawScreen = 1;
         mlAdvance(&ml0, &fieldFence);
     	  movLayerDraw(&ml0,&layer0);
     	}
-    	if(switches && 2){
+    	if(switches & 2){
     	  ml1.velocity.axes[1] = -4;
         redrawScreen = 1;
         mlAdvance(&ml1, &fieldFence);
     	  movLayerDraw(&ml1,&layer1);
     	}
-      if(switches && 3){
+      if(switches & 3){
         ml1.velocity.axes[1] = 4;
         redrawScreen = 1;
         mlAdvance(&ml1, &fieldFence);
