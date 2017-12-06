@@ -33,7 +33,6 @@ Layer layer3 = {		/**< Layer with an orange circle */
   {(screenWidth/2)+10, (screenHeight/2)+5}, /**< bit below & right of center */
   {0,0}, {0,0},				    /* last & next pos */
   COLOR_VIOLET,
-  &layer4,
 };
 
 
@@ -166,7 +165,8 @@ void scored(int player){
 void printScore(char *score, char width){
   drawString5x7(width,5, score, COLOR_WHITE, COLOR_BLACK);
 }
-/** Initializes everything, enables interrupts and green LED,
+/** Initializes everything, enables
+ interrupts and green LED,
  *  and handles the rendering for the screen
  */
 void main()
