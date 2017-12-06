@@ -234,6 +234,7 @@ void wdt_c_handler()
         movLayerDraw(&ml1,&layer1);
         count = 0;
       }
+      redrawScreen = 1;
     }
   P1OUT &= ~GREEN_LED;		    /**< Green LED off when cpu off */
 }
