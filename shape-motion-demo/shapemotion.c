@@ -70,8 +70,8 @@ typedef struct MovLayer_s {
 
 /* initial value of {0,0} will be overwritten */
 MovLayer ml3 = { &layer2, {2,2}, 0 }; /**< not all layers move */
-MovLayer ml1 = { &layer1, {0,0}, 0 };
-MovLayer ml0 = { &layer0, {0,0}, 0 };
+MovLayer ml1 = { &layer1, {0,2}, 0 };
+MovLayer ml0 = { &layer0, {0,2}, 0 };
 
 void movLayerDraw(MovLayer *movLayers, Layer *layers)
 {
@@ -207,7 +207,7 @@ void wdt_c_handler()
   static short count = 0;
   P1OUT |= GREEN_LED;		      /**< Green LED on when cpu on */
   count ++;
-  if (count == 15) {
+
     mlAdvance(&ml0, &fieldFence);
     u_int switches = p2sw_read();
     if(switches & 0){
@@ -215,26 +215,31 @@ void wdt_c_handler()
         redrawScreen = 1;
         mlAdvance(&ml0, &fieldFence);
     	  movLayerDraw(&ml0,&layer0);
+        count = 0;
     	}
     	if(switches & 1){
     	  ml0.velocity.axes[1] = 4;
         redrawScreen = 1;
         mlAdvance(&ml0, &fieldFence);
     	  movLayerDraw(&ml0,&layer0);
+        count = 0;
     	}
     	if(switches & 2){
     	  ml1.velocity.axes[1] = -4;
         redrawScreen = 1;
         mlAdvance(&ml1, &fieldFence);
     	  movLayerDraw(&ml1,&layer1);
+        count = 0;
     	}
       if(switches & 3){
         ml1.velocity.axes[1] = 4;
         redrawScreen = 1;
         mlAdvance(&ml1, &fieldFence);
         movLayerDraw(&ml1,&layer1);
+        count = 0;
       }
-    count = 0;
-  }
+
+    if (count == 15) {
+    }
   P1OUT &= ~GREEN_LED;		    /**< Green LED off when cpu off */
 }
