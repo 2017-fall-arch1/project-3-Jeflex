@@ -27,21 +27,19 @@ AbRectOutline fieldOutline = {	/* playing field */
   {screenWidth/2 - 10, screenHeight/2 - 10}
 };
 
-
-Layer layer3 = {		/**< Layer with an orange circle */
-  (AbShape *)&circle4,
-  {(screenWidth/2)+10, (screenHeight/2)+5}, /**< bit below & right of center */
-  {0,0}, {0,0},				    /* last & next pos */
-  COLOR_VIOLET,
-};
-
-
 Layer fieldLayer = {		/* playing field as a layer */
   (AbShape *) &fieldOutline,
   {screenWidth/2, screenHeight/2},/**< center */
   {0,0}, {0,0},				    /* last & next pos */
   COLOR_BLACK,
   &layer3
+};
+
+Layer layer2 = {		/**< Layer with an orange circle */
+  (AbShape *)&circle4,
+  {(screenWidth/2)+10, (screenHeight/2)+5}, /**< bit below & right of center */
+  {0,0}, {0,0},				    /* last & next pos */
+  COLOR_VIOLET,
 };
 
 Layer layer1 = {		/**< Layer with a red square */
@@ -71,9 +69,9 @@ typedef struct MovLayer_s {
 } MovLayer;
 
 /* initial value of {0,0} will be overwritten */
-MovLayer ml3 = { &layer0, {0,2}, 0 }; /**< not all layers move */
+MovLayer ml3 = { &layer2, {2,2}, 0 }; /**< not all layers move */
 MovLayer ml1 = { &layer1, {0,2}, 0 };
-MovLayer ml0 = { &layer3, {2,2}, 0 };
+MovLayer ml0 = { &layer0, {0,2}, 0 };
 
 void movLayerDraw(MovLayer *movLayers, Layer *layers)
 {
@@ -215,14 +213,14 @@ void wdt_c_handler()
     if(switches & 0){
     	  ml0.velocity.axes[1] = -4;
         redrawScreen = 1;
-        mlAdvance(&ml3, &fieldFence);
-    	  movLayerDraw(&ml3,&layer0);
+        mlAdvance(&ml0, &fieldFence);
+    	  movLayerDraw(&ml0,&layer0);
     	}
     	if(switches & 1){
     	  ml0.velocity.axes[1] = 4;
         redrawScreen = 1;
-        mlAdvance(&ml3, &fieldFence);
-    	  movLayerDraw(&ml3,&layer0);
+        mlAdvance(&ml0, &fieldFence);
+    	  movLayerDraw(&ml0,&layer0);
     	}
     	if(switches & 2){
     	  ml1.velocity.axes[1] = -4;
