@@ -70,8 +70,8 @@ typedef struct MovLayer_s {
 
 /* initial value of {0,0} will be overwritten */
 MovLayer ml3 = { &layer2, {2,2}, 0 }; /**< not all layers move */
-MovLayer ml1 = { &layer1, {0,2}, 0 };
-MovLayer ml0 = { &layer0, {0,2}, 0 };
+MovLayer ml1 = { &layer1, {0,0}, 0 };
+MovLayer ml0 = { &layer0, {0,0}, 0 };
 
 void movLayerDraw(MovLayer *movLayers, Layer *layers)
 {
