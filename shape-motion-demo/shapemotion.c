@@ -12,7 +12,7 @@
 #include <lcddraw.h>
 #include <p2switches.h>
 #include <shape.h>
-#include <abCircle.h>z
+#include <abCircle.h>
 
 #define GREEN_LED BIT6
 
@@ -46,7 +46,7 @@ Layer fieldLayer = {		/* playing field as a layer */
 
 Layer layer1 = {		/**< Layer with a red square */
   (AbShape *)&paddle,
-  {screenWidth/2, screenHeight/2}, /**< center */
+  {screenWidth/2 - 100, screenHeight/2}, /**< center */
   {0,0}, {0,0},				    /* last & next pos */
   COLOR_RED,
   &fieldLayer,
@@ -54,7 +54,7 @@ Layer layer1 = {		/**< Layer with a red square */
 
 Layer layer0 = {		/**< Layer with an orange circle */
   (AbShape *)&paddle,
-  {(screenWidth/2)+10, (screenHeight/2)+5}, /**< bit below & right of center */
+  {(screenWidth/2)+100, (screenHeight/2)}, /**< bit below & right of center */
   {0,0}, {0,0},				    /* last & next pos */
   COLOR_ORANGE,
   &layer1,
