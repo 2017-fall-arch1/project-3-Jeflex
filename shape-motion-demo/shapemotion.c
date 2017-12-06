@@ -20,7 +20,7 @@
 AbRect rect10 = {abRectGetBounds, abRectCheck, {10,10}}; /**< 10x10 rectangle */
 AbRArrow rightArrow = {abRArrowGetBounds, abRArrowCheck, 30};
 
-AbRect paddle = {abRectGetBounds, abRectCheck, {3,15}};   /**< 3x15 paddle*/
+AbRect paddle = {abRectGetBounds, abRectCheck, {20,3}};
 
 AbRectOutline fieldOutline = {	/* playing field */
   abRectOutlineGetBounds, abRectOutlineCheck,
