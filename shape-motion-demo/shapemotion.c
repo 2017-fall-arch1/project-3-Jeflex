@@ -197,7 +197,6 @@ void main()
     }
     P1OUT |= GREEN_LED;       /**< Green led on when CPU on */
     redrawScreen = 0;
-    movLayerDraw(&ml0, &layer0);
   }
 }
 
@@ -212,29 +211,32 @@ void wdt_c_handler()
     u_int switches = p2sw_read();
     if(switches & 0){
     	  ml0.velocity.axes[0] = -4;
+        redrawScreen = 1;
         mlAdvance(&ml0, &fieldFence);
     	  movLayerDraw(&ml0,&layer0);
         count = 0;
     	}
     	if(switches & 1){
     	  ml0.velocity.axes[0] = 4;
+        redrawScreen = 1;
         mlAdvance(&ml0, &fieldFence);
     	  movLayerDraw(&ml0,&layer0);
         count = 0;
     	}
     	if(switches & 7){
     	  ml1.velocity.axes[0] = -4;
+        redrawScreen = 1;
         mlAdvance(&ml1, &fieldFence);
     	  movLayerDraw(&ml1,&layer1);
         count = 0;
     	}
       if(switches & 8){
         ml1.velocity.axes[0] = 4;
+        redrawScreen = 1;
         mlAdvance(&ml1, &fieldFence);
         movLayerDraw(&ml1,&layer1);
         count = 0;
       }
-      redrawScreen = 1;
     }
   P1OUT &= ~GREEN_LED;		    /**< Green LED off when cpu off */
 }
