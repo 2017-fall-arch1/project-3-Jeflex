@@ -119,6 +119,11 @@ void movLayerDraw(MovLayer *movLayers, Layer *layers)
  *  \param ml The moving shape to be advanced
  *  \param fence The region which will serve as a boundary for ml
  */
+
+void movePaddle(MovLayer *m1, Region *fence){
+
+}
+
 void mlAdvance(MovLayer *ml, Region *fence)
 {
   Vec2 newPos;
@@ -175,7 +180,7 @@ void main()
   configureClocks();
   lcd_init();
   shapeInit();
-  p2sw_init(1);
+  p2sw_init(15);
 
   shapeInit();
 
@@ -203,36 +208,33 @@ void main()
 /** Watchdog timer interrupt handler. 15 interrupts/sec */
 void wdt_c_handler()
 {
+  redrawScreen = 1;
   static short count = 0;
   P1OUT |= GREEN_LED;		      /**< Green LED on when cpu on */
   count ++;
   if (count == 15) {
     mlAdvance(&ml0, &fieldFence);
     u_int switches = p2sw_read();
-    if(switches & 0){
-    	  ml0.velocity.axes[0] = -4;
-        redrawScreen = 1;
+    if(switches & 1){
+    	  ml0.velocity.axes[0] = -1;
         mlAdvance(&ml0, &fieldFence);
     	  movLayerDraw(&ml0,&layer0);
         count = 0;
     	}
-    	if(switches & 1){
-    	  ml0.velocity.axes[0] = 4;
-        redrawScreen = 1;
+    	if(switches & 2){
+    	  ml0.velocity.axes[0] = 1;
         mlAdvance(&ml0, &fieldFence);
     	  movLayerDraw(&ml0,&layer0);
         count = 0;
     	}
     	if(switches & 7){
-    	  ml1.velocity.axes[0] = -4;
-        redrawScreen = 1;
+    	  ml1.velocity.axes[0] = -1;
         mlAdvance(&ml1, &fieldFence);
     	  movLayerDraw(&ml1,&layer1);
         count = 0;
     	}
       if(switches & 8){
-        ml1.velocity.axes[0] = 4;
-        redrawScreen = 1;
+        ml1.velocity.axes[0] = 1;
         mlAdvance(&ml1, &fieldFence);
         movLayerDraw(&ml1,&layer1);
         count = 0;
