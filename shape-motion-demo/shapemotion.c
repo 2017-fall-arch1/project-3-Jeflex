@@ -224,14 +224,14 @@ void wdt_c_handler()
     	  movLayerDraw(&ml0,&layer0);
         count = 0;
     	}
-    	if(switches & 2){
+    	if(switches & 7){
     	  ml1.velocity.axes[0] = -4;
         redrawScreen = 1;
         mlAdvance(&ml1, &fieldFence);
     	  movLayerDraw(&ml1,&layer1);
         count = 0;
     	}
-      if(switches & 3){
+      if(switches & 8){
         ml1.velocity.axes[0] = 4;
         redrawScreen = 1;
         mlAdvance(&ml1, &fieldFence);
