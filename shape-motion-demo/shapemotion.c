@@ -32,7 +32,7 @@ Layer fieldLayer = {		/* playing field as a layer */
   {screenWidth/2, screenHeight/2},/**< center */
   {0,0}, {0,0},				    /* last & next pos */
   COLOR_BLACK,
-  &layer3
+  0
 };
 
 Layer layer2 = {		/**< Layer with an orange circle */
