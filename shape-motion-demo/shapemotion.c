@@ -142,15 +142,7 @@ void mlAdvance(MovLayer *ml, Region *fence)
       if(shapeBoundary.botRight.axes[1] > fence->botRight.axes[axis]){
             p2Score++;
           }
-          if(abRectCheck(&paddle, &(paddle.pos), &(ml->layer->pos)) && axis == 1){
 
-    	  int velocity = ml->velocity.axes[axis] = -ml->velocity.axes[axis];
-    	  newPos.axes[axis] += (2*velocity);
-    	  buzzer_set_period(4000);
-    	  while(++count < 20000){}
-    	  buzzer_set_period(0);
-    	  count = 0;
-    	}
 	int velocity = ml->velocity.axes[axis] = -ml->velocity.axes[axis];
 	newPos.axes[axis] += (2*velocity);
       }	/**< if outside of fence */
@@ -160,23 +152,30 @@ void mlAdvance(MovLayer *ml, Region *fence)
 }
 
 
+void bouncePaddle(MovLayer *ball, MovLayer *paddle){
+    Region b1;
+    Region b2;
+    Vec2 xy;
+    u_char x;
+
+    abShapeGetBounds(paddle->layer->abShape, &paddle->layer->posNext, &b1);
+    vec2Add(&xy, &ball->layer->pos, &ball->velocity);
+    abShapeGetBounds(ball->layer->abShape, &xy, &b2);
+
+    if(abShapeCheck(paddle->layer->abShape, &paddle->layer->pos, &b2.topLeft) ||
+        abShapeCheck(paddle->layer->abShape, &paddle->layer->pos, &b2.botRight) ){
+        int velocity = ball->velocity.axes[0] = -ball->velocity.axes[0];
+        xy.axes[0] += (2*velocity);
+        buzzer_set_period(1500);
+    }
+}
+
 u_int bgColor = COLOR_BLUE;     /**< The background color */
 int redrawScreen = 1;           /**< Boolean for whether screen needs to be redrawn */
 char playGame = 0;
 char gameOver = 0;
 
 Region fieldFence;		/**< fence around playing field  */
-//
-// void scored(int player){
-//   if(player == 0){
-//     p1Score++;
-//     printScore(p1Score, 10);
-//   }
-//   else{
-//     p2Score++;
-//     printScore(p2Score, 100);
-//   }
-// }
 
 /** Initializes everything, enables
  interrupts and green LED,
