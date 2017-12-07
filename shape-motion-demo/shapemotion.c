@@ -221,6 +221,7 @@ void wdt_c_handler()
   static short count = 0;
   P1OUT |= GREEN_LED;		      /**< Green LED on when cpu on */
   count ++;
+  buzzer_set_period(0);
   if (count == 15) {
     redrawScreen = 1;
     mlAdvance(&ml0, &fieldFence);
