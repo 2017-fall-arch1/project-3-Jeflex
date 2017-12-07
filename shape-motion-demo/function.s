@@ -4,5 +4,13 @@
   .extern makeSong
 
 makeSong:
-  mov #1500, R12
+  mov #150, R12
+  CALL #buzzer_set_period
+  mov #100, R12
+  CALL #buzzer_set_period
+  mov #50, R12
+  CALL #buzzer_set_period
+  mov #20, R12
+  CALL #buzzer_set_period
+  mov #35, R12
   CALL #buzzer_set_period
