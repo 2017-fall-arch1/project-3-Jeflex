@@ -218,8 +218,9 @@ void wdt_c_handler()
   if (count == 15) {
     redrawScreen = 1;
     mlAdvance(&ml0, &fieldFence);
-    drawString5x7((screenWidth/2), (screenHeight/2) - 68, p1Score + '0', COLOR_WHITE, COLOR_BLACK);
-    drawString5x7((screenWidth/2), (screenHeight/2) + 68, p2Score + '0', COLOR_WHITE, COLOR_BLACK);
+    char dir[] = {'0','1','2','3'};
+    drawString5x7((screenWidth/2), (screenHeight/2) - 68, dir[p1Score], COLOR_WHITE, COLOR_BLACK);
+    drawString5x7((screenWidth/2), (screenHeight/2) + 68, dir[p2Score], COLOR_WHITE, COLOR_BLACK);
     u_int switches = p2sw_read(), i;
     char str[5];
     for (i = 0; i < 4; i++){
