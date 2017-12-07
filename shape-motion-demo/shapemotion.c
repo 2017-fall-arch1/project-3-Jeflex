@@ -23,7 +23,7 @@ AbRect rect10 = {abRectGetBounds, abRectCheck, {20,3}}; /**< 10x10 rectangle */
 
 char p1Score[] = "0";
 char p2Score[] = "0";
-int direction = "0";
+
 
 
 AbRectOutline fieldOutline = {	/* playing field */
@@ -215,6 +215,7 @@ void wdt_c_handler()
   unsigned int switches = p2sw_read();
   if (count == 15) {
     redrawScreen = 1;
+    mlAdvance(&ml0, &fieldFence);
     if(~switches & 1){
       ml0.velocity.axes[0] = 0;
       ml0.velocity.axes[1] = -1;
