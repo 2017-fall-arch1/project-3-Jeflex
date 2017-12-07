@@ -39,28 +39,28 @@ Layer fieldLayer = {		/* playing field as a layer */
 };
 
 
+Layer layer2 = {		/**< Layer with an orange circle */
+  (AbShape *)&rect10,
+  {(screenWidth/2)+10, (screenHeight/2)+5}, /**< bit below & right of center */
+  {0,0}, {0,0},				    /* last & next pos */
+  COLOR_VIOLET,
+  &fieldLayer,
+};
+
 Layer layer1 = {		/**< Layer with a red square */
   (AbShape *)&paddle,
   {screenWidth/2, screenHeight/2 - 65}, /**< center */
   {0,0}, {0,0},				    /* last & next pos */
   COLOR_RED,
-  &fieldLayer,
+  &layer2,
 };
 
 Layer layer0 = {		/**< Layer with an orange circle */
-  (AbShape *)&rect10,
+  (AbShape *)&circle4,
   {(screenWidth/2), (screenHeight/2 + 65)}, /**< bit below & right of center */
   {0,0}, {0,0},				    /* last & next pos */
   COLOR_ORANGE,
   &layer1,
-};
-
-Layer layer2 = {		/**< Layer with an orange circle */
-  (AbShape *)&circle4,
-  {(screenWidth/2)+10, (screenHeight/2)+5}, /**< bit below & right of center */
-  {0,0}, {0,0},				    /* last & next pos */
-  COLOR_VIOLET,
-  &layer0,
 };
 /** Moving Layer
  *  Linked list of layer references
@@ -73,9 +73,9 @@ typedef struct MovLayer_s {
 } MovLayer;
 
 /* initial value of {0,0} will be overwritten */
-MovLayer ml3 = { &layer2, {2,2}, 0 }; /**< not all layers move */
-MovLayer ml1 = { &layer1, {0,2}, 0 };
-MovLayer ml0 = { &layer0, {0,2}, 0 };
+MovLayer ml3 = { &layer2, {0,0}, 0 }; /**< not all layers move */
+MovLayer ml1 = { &layer1, {0,0}, &ml3};
+MovLayer ml0 = { &layer0, {1,1}, &ml1 };
 
 void movLayerDraw(MovLayer *movLayers, Layer *layers)
 {
@@ -124,8 +124,8 @@ void movLayerDraw(MovLayer *movLayers, Layer *layers)
  *  \param fence The region which will serve as a boundary for ml
  */
 
-void movePaddle(MovLayer *m1, Region *fence){
-
+void movePaddle(MovLayer *m1, int dir){
+  m1 -> velocity.axes[1] = 2*(dir)
 }
 
 void mlAdvance(MovLayer *ml, Region *fence)
@@ -204,45 +204,35 @@ void main()
     }
     P1OUT |= GREEN_LED;       /**< Green led on when CPU on */
     redrawScreen = 0;
+    movLayerDraw(&ml0, &layer0);
   }
 }
 
 /** Watchdog timer interrupt handler. 15 interrupts/sec */
 void wdt_c_handler()
 {
-  redrawScreen = 1;
   static short count = 0;
   P1OUT |= GREEN_LED;		      /**< Green LED on when cpu on */
   count ++;
+  bouncyBall(&fieldFence,&ml0);
+  unsigned int switches = p2sw_read();
+
   if (count == 15) {
+    redrawScreen = 1;
     mlAdvance(&ml0, &fieldFence);
+    if(~switches & 1){
+
     }
-    u_int switches = p2sw_read(), i;
-     for (i = 0; i < 4; i++){
-       if(!(switches & (1<<i))){
-         if(i == 0){
-           ml0.velocity.axes[1] = -1;
-           movLayerDraw(&ml3,&layer0);
-           mlAdvance(&ml3, &fieldFence);
-         }
-         if(i == 1){
-           ml0.velocity.axes[1] = 1;
-           movLayerDraw(&ml3,&layer0);
-           mlAdvance(&ml3, &fieldFence);
-         }
-         if(i == 2){
-           ml1.velocity.axes[1] = -1;
-           movLayerDraw(&ml3,&layer1);
-           mlAdvance(&ml3, &fieldFence);
-         }
-         if(i == 3){
-           ml1.velocity.axes[1] = 1;
-           movLayerDraw(&ml3,&layer1);
-           mlAdvance(&ml3, &fieldFence);
-         }
-       }
-       count = 0;
-     }
+    if(~switches & 2){
+
+    }
+    if(~switches & 7){
+
+    }
+    if(~switches & 8){
+
+    }
+  }
 
   P1OUT &= ~GREEN_LED;		    /**< Green LED off when cpu off */
 }
