@@ -219,7 +219,7 @@ void wdt_c_handler()
     redrawScreen = 1;
     mlAdvance(&ml0, &fieldFence);
     char dir[] = {'0','1','2','3'};
-    char tot[] = {dir[p1Score] + ' , '+dir[p2Score]};
+    char tot[] = {dir[p1Score] + ','+dir[p2Score]};
     drawString5x7(60,150, tot, COLOR_RED, COLOR_WHITE);
     u_int switches = p2sw_read(), i;
     char str[5];
