@@ -223,7 +223,7 @@ void wdt_c_handler()
 
     if((p1Score > 2) || (p2Score > 2)){
       clearScreen(COLOR_BLUE);
-      drawString5x7(20,60, "Point. Game. Set. Match.", COLOR_RED);
+      drawString5x7(20,60, "Point. Game. Set. Match.", COLOR_RED, COLOR_WHITE);
 
     }
 
