@@ -211,7 +211,6 @@ void wdt_c_handler()
   static short count = 0;
   P1OUT |= GREEN_LED;		      /**< Green LED on when cpu on */
   count ++;
-  bouncyBall(&fieldFence,&ml0);
   unsigned int switches = p2sw_read();
 
   if (count == 15) {
