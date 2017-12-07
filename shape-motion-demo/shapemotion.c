@@ -221,7 +221,8 @@ void wdt_c_handler()
   buzzer_set_period(0);
   while((p1Score > 2) || (p2Score > 2)){
     clearScreen(COLOR_BLUE);
-    drawString5x7(20,60, "Point. Game. Set. Match.", COLOR_RED, COLOR_WHITE);
+    drawString5x7(20,60, "GG dude", COLOR_RED, COLOR_WHITE);
+    redrawScreen = 0;
   }
   if (count == 15) {
     redrawScreen = 1;
