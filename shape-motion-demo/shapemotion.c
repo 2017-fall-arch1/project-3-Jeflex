@@ -213,8 +213,6 @@ void wdt_c_handler()
   count ++;
   if (count == 15) {
     mlAdvance(&ml0, &fieldFence);
-    u_int switches = p2sw_read();
-    mlAdvance(&ml0, &fieldFence);
     u_int switches = p2sw_read(), i;
     char str[5];
     for (i = 0; i < 4; i++)
