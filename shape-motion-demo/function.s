@@ -1,8 +1,7 @@
   .file "function.s"
+.text
   .arch msp430g2553
-
-  .global onDone
-
+  
   .extern makeSong
 
   makeSong:
