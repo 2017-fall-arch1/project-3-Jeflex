@@ -264,9 +264,7 @@ void wdt_c_handler()
       clearScreen(COLOR_BLUE);
       drawString5x7(30,60, "GG dude", COLOR_RED, COLOR_WHITE);
       redrawScreen = 0;
-      while(1){
         makeSong();
-      }
     }
   }
   P1OUT &= ~GREEN_LED;		    /**< Green LED off when cpu off */
