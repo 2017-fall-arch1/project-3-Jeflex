@@ -1,10 +1,10 @@
-  .file "_function.c"
+  .file "function.s"
   .arch msp430g2553
 
   .global onDone
 
-  .extern stateForMusic
+  .extern makeSong
 
-  onDone:
-    mov #1, &stateForMusic
-    ret
+  makeSong:
+  mov #1500, R12
+    CALL# buzzer_set_period
