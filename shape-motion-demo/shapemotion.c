@@ -40,6 +40,7 @@ Layer layer2 = {		/**< Layer with an orange circle */
   {(screenWidth/2)+10, (screenHeight/2)+5}, /**< bit below & right of center */
   {0,0}, {0,0},				    /* last & next pos */
   COLOR_VIOLET,
+  &layer1,
 };
 
 Layer layer1 = {		/**< Layer with a red square */
