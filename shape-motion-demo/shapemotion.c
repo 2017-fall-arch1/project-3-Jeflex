@@ -215,27 +215,27 @@ void wdt_c_handler()
     mlAdvance(&ml0, &fieldFence);
     u_int switches = p2sw_read();
 
-    if(~mySwitch & 1){
+    if(~switches & 1){
         ml0.velocity.axes[1] = 0;
         ml0.velocity.axes[0] = -3;
       }
-    if(~mySwitch & 2){
+    if(~switches & 2){
         ml0.velocity.axes[1] = 0;
         ml0.velocity.axes[0] = 3;
       }
-    if(~mySwitch & 7){
+    if(~switches & 7){
         ml1.velocity.axes[1] = 0;
         ml1.velocity.axes[0] = -3;
       }
-    if(~mySwitch & 8){
+    if(~switches & 8){
         ml1.velocity.axes[1] = 0;
         ml1.velocity.axes[0] = 3;
       }
-    if(!(~mySwitch & 1) && !(~mySwitch & 2)){
+    if(!(~switches & 1) && !(~switches & 2)){
         ml0.velocity.axes[1] = 0;
         ml0.velocity.axes[0] = 0;
       }
-    if(!(~mySwitch & 7) && !(~mySwitch & 8)){
+    if(!(~switches & 7) && !(~switches & 8)){
         ml1.velocity.axes[1] = 0;
         ml1.velocity.axes[0] = 0;
       }
