@@ -14,7 +14,7 @@
 #include <shape.h>
 #include <abCircle.h>
 #include "buzzer.h"
-#include <function.c>
+#include <function.s>
 
 #define GREEN_LED BIT6
 
@@ -225,7 +225,7 @@ void wdt_c_handler()
     if((p1Score > 2) || (p2Score > 2)){
       clearScreen(COLOR_BLUE);
       drawString5x7(20,60, "Point. Game. Set. Match.", COLOR_RED);
-      
+
     }
 
     redrawScreen = 1;
