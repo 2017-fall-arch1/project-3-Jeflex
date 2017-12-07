@@ -213,7 +213,7 @@ void wdt_c_handler()
   P1OUT |= GREEN_LED;		      /**< Green LED on when cpu on */
   count ++;
   unsigned int switches = p2sw_read();
-  movLayerDraw(&fieldFence, &ml0);
+  movLayerDraw(&ml0, &layer0);
   if (count == 15) {
     redrawScreen = 1;
     mlAdvance(&ml0, &fieldFence);
