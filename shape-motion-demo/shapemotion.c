@@ -219,28 +219,24 @@ void wdt_c_handler()
      for (i = 0; i < 4; i++){
        if(!(switches & (1<<i))){
          if(i == 0){
-           ml0.velocity.axes[1] = -4;
-           movLayerDraw(&ml0,&layer0);
-           mlAdvance(&ml0, &fieldFence);
-           redrawScreen = 1;
+           ml0.velocity.axes[1] = -1;
+           movLayerDraw(&ml3,&layer0);
+           mlAdvance(&ml3, &fieldFence);
          }
          if(i == 1){
-           ml0.velocity.axes[1] = 4;
-           movLayerDraw(&ml0,&layer0);
-           mlAdvance(&ml0, &fieldFence);
-           redrawScreen = 1;
+           ml0.velocity.axes[1] = 1;
+           movLayerDraw(&ml3,&layer0);
+           mlAdvance(&ml3, &fieldFence);
          }
          if(i == 2){
-           ml1.velocity.axes[1] = -4;
-           movLayerDraw(&ml1,&layer1);
-           mlAdvance(&ml1, &fieldFence);
-           redrawScreen = 1;
+           ml1.velocity.axes[1] = -1;
+           movLayerDraw(&ml3,&layer1);
+           mlAdvance(&ml3, &fieldFence);
          }
          if(i == 3){
-           ml1.velocity.axes[1] = 4;
-           movLayerDraw(&ml1,&layer1);
-           mlAdvance(&ml1, &fieldFence);
-           redrawScreen = 1;
+           ml1.velocity.axes[1] = 1;
+           movLayerDraw(&ml3,&layer1);
+           mlAdvance(&ml3, &fieldFence);
          }
        }
        count = 0;
