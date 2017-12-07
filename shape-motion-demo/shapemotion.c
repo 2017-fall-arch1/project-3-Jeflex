@@ -193,8 +193,6 @@ void main()
 
   layerGetBounds(&fieldLayer, &fieldFence);
 
-  drawString5x7((screenWidth/2), (screenHeight/2) - 70, p1Score, COLOR_WHITE, COLOR_BLACK);
-  drawString5x7((screenWidth/2), (screenHeight/2) + 70, p2Score, COLOR_WHITE, COLOR_BLACK);
 
   enableWDTInterrupts();      /**< enable periodic interrupt */
   or_sr(0x8);	              /**< GIE (enable interrupts) */
@@ -220,6 +218,8 @@ void wdt_c_handler()
   if (count == 15) {
     redrawScreen = 1;
     mlAdvance(&ml0, &fieldFence);
+    drawString5x7((screenWidth/2), (screenHeight/2) - 68, p1Score, COLOR_WHITE, COLOR_BLACK);
+    drawString5x7((screenWidth/2), (screenHeight/2) + 68, p2Score, COLOR_WHITE, COLOR_BLACK);
     u_int switches = p2sw_read(), i;
     char str[5];
     for (i = 0; i < 4; i++){
