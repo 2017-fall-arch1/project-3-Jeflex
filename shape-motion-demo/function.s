@@ -6,5 +6,5 @@
   .extern makeSong
 
   makeSong:
-  mov #1500, R12
+    mov #1500, R12
     CALL# buzzer_set_period
