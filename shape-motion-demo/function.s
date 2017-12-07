@@ -2,6 +2,7 @@
 .text
   .arch msp430g2553
   .extern makeSong
+  .global makeSong
 
 makeSong:
   mov #150, R12
