@@ -214,34 +214,41 @@ void wdt_c_handler()
   if (count == 15) {
     mlAdvance(&ml0, &fieldFence);
     u_int switches = p2sw_read();
+    mlAdvance(&ml0, &fieldFence);
+    u_int switches = p2sw_read(), i;
+    char str[5];
+    for (i = 0; i < 4; i++)
+        str[i] = (switches & (1<<i)) ? 0 : 1;
+    str[4] = 0;
 
-    if(~switches & 5){
+    if(str[0]){
         ml0.velocity.axes[1] = 0;
         ml0.velocity.axes[0] = -3;
-      }
-    if(~switches & 6){
+        redrawScreen = 1;
+    }
+    if(str[1]){
         ml0.velocity.axes[1] = 0;
         ml0.velocity.axes[0] = 3;
-      }
-    if(~switches & 7){
+        redrawScreen = 1;
+    }
+    if(str[2]){
         ml1.velocity.axes[1] = 0;
         ml1.velocity.axes[0] = -3;
-      }
-    if(~switches & 8){
+        redrawScreen = 1;
+    }
+    if(str[3]){
         ml1.velocity.axes[1] = 0;
         ml1.velocity.axes[0] = 3;
-      }
-    if(!(~switches & 5) && !(~switches & 6)){
+        redrawScreen = 1;
+    }
+    if(!str[0] && !str[1]){
         ml0.velocity.axes[1] = 0;
         ml0.velocity.axes[0] = 0;
-      }
-    if(!(~switches & 7) && !(~switches & 8)){
+    }
+    if(!str[2] && !str[3]){
         ml1.velocity.axes[1] = 0;
         ml1.velocity.axes[0] = 0;
-      }
-    if (p2sw_read()){
-        redrawScreen = 1;
-      }
+    }
     count = 0;
   }
 
