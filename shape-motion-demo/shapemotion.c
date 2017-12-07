@@ -164,8 +164,8 @@ void bouncePaddle(MovLayer *ball, MovLayer *paddle){
 
     if(abShapeCheck(paddle->layer->abShape, &paddle->layer->pos, &b2.topLeft) ||
         abShapeCheck(paddle->layer->abShape, &paddle->layer->pos, &b2.botRight) ){
-        int velocity = ball->velocity.axes[0] = -ball->velocity.axes[0];
-        xy.axes[0] += (2*velocity);
+        int velocity = ball->velocity.axes[1] = -ball->velocity.axes[1];
+        xy.axes[1] += (2*velocity);
         buzzer_set_period(1500);
     }
 }
