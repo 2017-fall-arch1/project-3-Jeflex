@@ -41,7 +41,7 @@ Layer fieldLayer = {		/* playing field as a layer */
 
 Layer layer2 = {		/**< Layer with an orange circle */
   (AbShape *)&rect10,
-  {(screenWidth/2)+10, (screenHeight/2)+5}, /**< bit below & right of center */
+  {(screenWidth/2), (screenHeight/2 + 65)}, /**< bit below & right of center */
   {0,0}, {0,0},				    /* last & next pos */
   COLOR_VIOLET,
   &fieldLayer,
@@ -57,7 +57,7 @@ Layer layer1 = {		/**< Layer with a red square */
 
 Layer layer0 = {		/**< Layer with an orange circle */
   (AbShape *)&circle4,
-  {(screenWidth/2), (screenHeight/2 + 65)}, /**< bit below & right of center */
+  {(screenWidth/2)+10, (screenHeight/2)+5}, /**< bit below & right of center */
   {0,0}, {0,0},				    /* last & next pos */
   COLOR_ORANGE,
   &layer1,
