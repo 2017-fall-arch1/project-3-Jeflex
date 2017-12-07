@@ -220,28 +220,28 @@ void wdt_c_handler()
     str[4] = 0;
 
     if(str[0]){
-        ml0.velocity.axes[0] = 0;
-        ml0.velocity.axes[1] = -5;
+        ml0.velocity.axes[1] = 0;
+        ml0.velocity.axes[0] = -5;
       }
     if(str[1]){
-        ml0.velocity.axes[0] = 0;
-        ml0.velocity.axes[1] = 5;
+        ml0.velocity.axes[1] = 0;
+        ml0.velocity.axes[0] = 5;
       }
     if(str[2]){
-        ml1.velocity.axes[0] = 0;
-        ml1.velocity.axes[1] = -5;
+        ml1.velocity.axes[1] = 0;
+        ml1.velocity.axes[0] = -5;
       }
     if(str[3]){
-        ml1.velocity.axes[0] = 0;
-        ml1.velocity.axes[1] = 5;
+        ml1.velocity.axes[1] = 0;
+        ml1.velocity.axes[0] = 5;
       }
     if(!str[0] && !str[1]){
-        ml0.velocity.axes[0] = 0;
         ml0.velocity.axes[1] = 0;
+        ml0.velocity.axes[0] = 0;
       }
     if(!str[2] && !str[3]){
-        ml1.velocity.axes[0] = 0;
         ml1.velocity.axes[1] = 0;
+        ml1.velocity.axes[0] = 0;
       }
     if (p2sw_read()){
         redrawScreen = 1;
