@@ -212,30 +212,42 @@ void wdt_c_handler()
   static short count = 0;
   P1OUT |= GREEN_LED;		      /**< Green LED on when cpu on */
   count ++;
-  unsigned int switches = p2sw_read();
   if (count == 15) {
-    redrawScreen = 1;
-    mlAdvance(&ml0, &fieldFence);
-    if(~switches & 1){
-      ml0.velocity.axes[0] = 0;
-      ml0.velocity.axes[1] = -1;
-      mlAdvance(&ml0, &fieldFence);
-    }
-    if(~switches & 2){
-      ml0.velocity.axes[0] = 0;
-      ml0.velocity.axes[1] = 1;
-      mlAdvance(&ml0, &fieldFence);
-    }
-    if(~switches & 7){
-      ml3.velocity.axes[0] = 0;
-      ml3.velocity.axes[1] = -1;
-      mlAdvance(&ml0, &fieldFence);
-    }
-    if(~switches & 8){
-      ml3.velocity.axes[0] = 0;
-      ml3.velocity.axes[1] = -1;
-      mlAdvance(&ml0, &fieldFence);
-    }
+    u_int switches = p2sw_read(), i;
+    char str[5];
+    for (i = 0; i < 4; i++){
+        str[i] = (switches & (1<<i)) ? 0 : 1;
+      }
+    str[4] = 0;
+
+    if(str[0]){
+        ml0.velocity.axes[0] = 0;
+        ml0.velocity.axes[1] = -5;
+      }
+    if(str[1]){
+        ml0.velocity.axes[0] = 0;
+        ml0.velocity.axes[1] = 5;
+      }
+    if(str[2]){
+        ml1.velocity.axes[0] = 0;
+        ml1.velocity.axes[1] = -5;
+      }
+    if(str[3]){
+        ml1.velocity.axes[0] = 0;
+        ml1.velocity.axes[1] = 5;
+      }
+    if(!str[0] && !str[1]){
+        ml0.velocity.axes[0] = 0;
+        ml0.velocity.axes[1] = 0;
+      }
+    if(!str[2] && !str[3]){
+        ml1.velocity.axes[0] = 0;
+        ml1.velocity.axes[1] = 0;
+      }
+    if (p2sw_read()){
+        redrawScreen = 1;
+      }
+    count = 0;
   }
 
   P1OUT &= ~GREEN_LED;		    /**< Green LED off when cpu off */
