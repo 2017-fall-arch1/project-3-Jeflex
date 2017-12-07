@@ -19,7 +19,6 @@
 
 
 AbRect paddle = {abRectGetBounds, abRectCheck, {20,3}};
-AbRect rect10 = {abRectGetBounds, abRectCheck, {20,3}}; /**< 10x10 rectangle */
 
 char p1Score[] = "0";
 char p2Score[] = "0";
@@ -31,34 +30,34 @@ AbRectOutline fieldOutline = {	/* playing field */
   {screenWidth/2 - 10, screenHeight/2 - 10}
 };
 
-Layer fieldLayer = {		/* playing field as a layer */
-  (AbShape *) &fieldOutline,
-  {screenWidth/2, screenHeight/2},/**< center */
+Layer layer3 = {		/**< Layer with an orange circle */
+  (AbShape *)&circle4,
+  {(screenWidth/2)+10, (screenHeight/2)+5}, /**< bit below & right of center */
   {0,0}, {0,0},				    /* last & next pos */
   COLOR_BLACK,
   0
 };
 
 
-Layer layer2 = {		/**< Layer with an orange circle */
-  (AbShape *)&rect10,
-  {(screenWidth/2), (screenHeight/2 + 65)}, /**< bit below & right of center */
+Layer fieldLayer = {		/* playing field as a layer */
+  (AbShape *) &fieldOutline,
+  {screenWidth/2, screenHeight/2},/**< center */
   {0,0}, {0,0},				    /* last & next pos */
-  COLOR_VIOLET,
-  &fieldLayer,
+  COLOR_BLACK,
+  &layer3
 };
 
 Layer layer1 = {		/**< Layer with a red square */
   (AbShape *)&paddle,
-  {screenWidth/2, screenHeight/2 - 65}, /**< center */
+  {(screenWidth/2)+50, screenHeight/2}, /**< center */
   {0,0}, {0,0},				    /* last & next pos */
-  COLOR_RED,
-  &layer2,
+  COLOR_ORANGE,
+  &fieldLayer,
 };
 
 Layer layer0 = {		/**< Layer with an orange circle */
-  (AbShape *)&circle4,
-  {(screenWidth/2)+10, (screenHeight/2)+5}, /**< bit below & right of center */
+  (AbShape *)&paddle,
+  {(screenWidth/2)-50, (screenHeight/2)}, /**< bit below & right of center */
   {0,0}, {0,0},				    /* last & next pos */
   COLOR_ORANGE,
   &layer1,
@@ -74,9 +73,9 @@ typedef struct MovLayer_s {
 } MovLayer;
 
 /* initial value of {0,0} will be overwritten */
-MovLayer ml3 = { &layer2, {0,0}, 0 }; /**< not all layers move */
-MovLayer ml1 = { &layer1, {0,0}, &ml3};
-MovLayer ml0 = { &layer0, {1,1}, &ml1 };
+MovLayer ml3 = { &layer3, {3,3}, 0 }; /**< not all layers move */
+MovLayer ml1 = { &layer1, {0,0}, &ml3 };
+MovLayer ml0 = { &layer0, {0,0}, &ml1 };
 
 void movLayerDraw(MovLayer *movLayers, Layer *layers)
 {
