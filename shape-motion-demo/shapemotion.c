@@ -124,9 +124,6 @@ void movLayerDraw(MovLayer *movLayers, Layer *layers)
  *  \param fence The region which will serve as a boundary for ml
  */
 
-void movePaddle(MovLayer *m1, int dir){
-  m1 -> velocity.axes[1] = 2*(dir)
-}
 
 void mlAdvance(MovLayer *ml, Region *fence)
 {
