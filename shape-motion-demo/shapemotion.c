@@ -152,8 +152,6 @@ u_int bgColor = COLOR_BLUE;     /**< The background color */
 int redrawScreen = 1;           /**< Boolean for whether screen needs to be redrawn */
 char playGame = 0;
 char gameOver = 0;
-char p1Score = 0;
-char p2Score = 0;
 
 Region fieldFence;		/**< fence around playing field  */
 
