@@ -175,7 +175,7 @@ void main()
 {
   P1DIR |= GREEN_LED;		/**< Green led on when CPU on */
   P1OUT |= GREEN_LED;
-
+  buzzer_init();
   configureClocks();
   lcd_init();
   shapeInit();
