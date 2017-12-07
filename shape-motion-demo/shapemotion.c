@@ -14,7 +14,7 @@
 #include <shape.h>
 #include <abCircle.h>
 #include "buzzer.h"
-#include "_function.c"
+#include "_function.s"
 
 #define GREEN_LED BIT6
 
