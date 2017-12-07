@@ -13,6 +13,7 @@
 #include <p2switches.h>
 #include <shape.h>
 #include <abCircle.h>
+#include "buzzer.h"
 
 #define GREEN_LED BIT6
 
@@ -212,7 +213,7 @@ void wdt_c_handler()
   P1OUT |= GREEN_LED;		      /**< Green LED on when cpu on */
   count ++;
   unsigned int switches = p2sw_read();
-
+  bouncyBall(&fieldFence, &ml0);
   if (count == 15) {
     redrawScreen = 1;
     mlAdvance(&ml0, &fieldFence);
