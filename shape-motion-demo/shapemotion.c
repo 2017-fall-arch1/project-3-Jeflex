@@ -115,9 +115,6 @@ void movLayerDraw(MovLayer *movLayers, Layer *layers)
 }
 
 
-
-//Region fence = {{10,30}, {SHORT_EDGE_PIXELS-10, LONG_EDGE_PIXELS-10}}; /**< Create a fence region */
-
 /** Advances a moving shape within a fence
  *
  *  \param ml The moving shape to be advanced
