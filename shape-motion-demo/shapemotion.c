@@ -154,17 +154,17 @@ char playGame = 0;
 char gameOver = 0;
 
 Region fieldFence;		/**< fence around playing field  */
-
-void scored(int player){
-  if(player == 0){
-    p1Score++;
-    printScore(p1Score, 10);
-  }
-  else{
-    p2Score++;
-    printScore(p2Score, 100);
-  }
-}
+//
+// void scored(int player){
+//   if(player == 0){
+//     p1Score++;
+//     printScore(p1Score, 10);
+//   }
+//   else{
+//     p2Score++;
+//     printScore(p2Score, 100);
+//   }
+// }
 
 
 void printScore(char *score, char width){
