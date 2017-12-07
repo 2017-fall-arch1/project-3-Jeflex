@@ -213,21 +213,24 @@ void wdt_c_handler()
   P1OUT |= GREEN_LED;		      /**< Green LED on when cpu on */
   count ++;
   unsigned int switches = p2sw_read();
-  movLayerDraw(&ml0, &layer0);
   if (count == 15) {
     redrawScreen = 1;
     mlAdvance(&ml0, &fieldFence);
     if(~switches & 1){
-
+      ml0.velocity.axes[0] = 0;
+      ml0.velocity.axes[1] = -1;
     }
     if(~switches & 2){
-
+      ml0.velocity.axes[0] = 0;
+      ml0.velocity.axes[1] = 1;
     }
     if(~switches & 7){
-
+      ml3.velocity.axes[0] = 0;
+      ml3.velocity.axes[1] = -1;
     }
     if(~switches & 8){
-
+      ml3.velocity.axes[0] = 0;
+      ml3.velocity.axes[1] = -1;
     }
   }
 
