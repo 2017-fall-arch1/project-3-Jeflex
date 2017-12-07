@@ -219,12 +219,12 @@ void wdt_c_handler()
   P1OUT |= GREEN_LED;		      /**< Green LED on when cpu on */
   count ++;
   buzzer_set_period(0);
-  while((p1Score > 2) || (p2Score > 2)){
+  if((p1Score > 2) || (p2Score > 2)){
     clearScreen(COLOR_BLUE);
     drawString5x7(20,60, "GG dude", COLOR_RED, COLOR_WHITE);
     redrawScreen = 0;
   }
-  if (count == 15) {
+  else if (count == 15) {
     redrawScreen = 1;
     mlAdvance(&ml0, &fieldFence);
     char dir[] = {'0','1','2','3'};
