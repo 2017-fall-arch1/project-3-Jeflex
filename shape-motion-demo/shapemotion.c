@@ -213,35 +213,29 @@ void wdt_c_handler()
   count ++;
   if (count == 15) {
     mlAdvance(&ml0, &fieldFence);
-    u_int switches = p2sw_read(), i;
-    char str[5];
-    for (i = 0; i < 4; i++){
-        str[i] = (switches & (1<<i)) ? 0 : 1;
-      }
+    u_int switches = p2sw_read();
 
-    str[4] = 0;
-
-    if(str[0]){
+    if(~mySwitch & 1){
         ml0.velocity.axes[1] = 0;
-        ml0.velocity.axes[0] = -5;
+        ml0.velocity.axes[0] = -3;
       }
-    if(str[1]){
+    if(~mySwitch & 2){
         ml0.velocity.axes[1] = 0;
-        ml0.velocity.axes[0] = 5;
+        ml0.velocity.axes[0] = 3;
       }
-    if(str[2]){
+    if(~mySwitch & 7){
         ml1.velocity.axes[1] = 0;
-        ml1.velocity.axes[0] = -5;
+        ml1.velocity.axes[0] = -3;
       }
-    if(str[3]){
+    if(~mySwitch & 8){
         ml1.velocity.axes[1] = 0;
-        ml1.velocity.axes[0] = 5;
+        ml1.velocity.axes[0] = 3;
       }
-    if(!str[0] && !str[1]){
+    if(!(~mySwitch & 1) && !(~mySwitch & 2)){
         ml0.velocity.axes[1] = 0;
         ml0.velocity.axes[0] = 0;
       }
-    if(!str[2] && !str[3]){
+    if(!(~mySwitch & 7) && !(~mySwitch & 8)){
         ml1.velocity.axes[1] = 0;
         ml1.velocity.axes[0] = 0;
       }
