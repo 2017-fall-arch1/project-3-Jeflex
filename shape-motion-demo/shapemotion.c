@@ -200,12 +200,6 @@ void main()
   enableWDTInterrupts();      /**< enable periodic interrupt */
   or_sr(0x8);	              /**< GIE (enable interrupts) */
 
-  if((p1Score > 2) || (p2Score > 2)){
-    clearScreen(COLOR_BLUE);
-    drawString5x7(20,60, "GG dude", COLOR_RED, COLOR_WHITE);
-    redrawScreen = 0;
-  }
-  
   for(;;) {
     while (!redrawScreen) { /**< Pause CPU if screen doesn't need updating */
       P1OUT &= ~GREEN_LED;    /**< Green led off witHo CPU */
@@ -224,6 +218,7 @@ void wdt_c_handler()
   P1OUT |= GREEN_LED;		      /**< Green LED on when cpu on */
   count ++;
   buzzer_set_period(0);
+
   if (count == 15) {
     redrawScreen = 1;
     mlAdvance(&ml0, &fieldFence);
@@ -263,7 +258,13 @@ void wdt_c_handler()
         ml1.velocity.axes[1] = 0;
         ml1.velocity.axes[0] = 0;
     }
+
     count = 0;
+    if((p1Score > 2) || (p2Score > 2)){
+      clearScreen(COLOR_BLUE);
+      drawString5x7(30,60, "GG dude", COLOR_RED, COLOR_WHITE);
+      redrawScreen = 0;
+    }
   }
   P1OUT &= ~GREEN_LED;		    /**< Green LED off when cpu off */
 }
