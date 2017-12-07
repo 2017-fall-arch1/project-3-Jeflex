@@ -17,10 +17,13 @@
 #define GREEN_LED BIT6
 
 
-AbRect rect10 = {abRectGetBounds, abRectCheck, {10,10}}; /**< 10x10 rectangle */
-AbRArrow rightArrow = {abRArrowGetBounds, abRArrowCheck, 30};
-
 AbRect paddle = {abRectGetBounds, abRectCheck, {20,3}};
+AbRect rect10 = {abRectGetBounds, abRectCheck, {20,3}}; /**< 10x10 rectangle */
+
+char p1Score[] = "0";
+char p2Score[] = "0";
+int direction = "0";
+
 
 AbRectOutline fieldOutline = {	/* playing field */
   abRectOutlineGetBounds, abRectOutlineCheck,
@@ -45,7 +48,7 @@ Layer layer1 = {		/**< Layer with a red square */
 };
 
 Layer layer0 = {		/**< Layer with an orange circle */
-  (AbShape *)&paddle,
+  (AbShape *)&rect10,
   {(screenWidth/2), (screenHeight/2 + 65)}, /**< bit below & right of center */
   {0,0}, {0,0},				    /* last & next pos */
   COLOR_ORANGE,
@@ -57,7 +60,7 @@ Layer layer2 = {		/**< Layer with an orange circle */
   {(screenWidth/2)+10, (screenHeight/2)+5}, /**< bit below & right of center */
   {0,0}, {0,0},				    /* last & next pos */
   COLOR_VIOLET,
-  &layer1,
+  &layer0,
 };
 /** Moving Layer
  *  Linked list of layer references
