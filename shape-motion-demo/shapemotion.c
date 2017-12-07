@@ -20,8 +20,8 @@
 
 AbRect paddle = {abRectGetBounds, abRectCheck, {20,3}};
 
-char p1Score[] = "0";
-char p2Score[] = "0";
+unsigned int p1Score = 0;
+unsigned int p2Score = 0;
 
 
 
@@ -51,7 +51,7 @@ Layer layer1 = {		/**< Layer with a red square */
   (AbShape *)&paddle,
   {(screenWidth/2), (screenHeight/2) - 64}, /**< center */
   {0,0}, {0,0},				    /* last & next pos */
-  COLOR_YELLOW,
+  COLOR_GREEN,
   &fieldLayer,
 };
 
@@ -59,7 +59,7 @@ Layer layer0 = {		/**< Layer with an orange circle */
   (AbShape *)&paddle,
   {(screenWidth/2), (screenHeight/2) + 64}, /**< bit below & right of center */
   {0,0}, {0,0},				    /* last & next pos */
-  COLOR_ORANGE,
+  COLOR_GREEN,
   &layer1,
 };
 /** Moving Layer
@@ -136,6 +136,14 @@ void mlAdvance(MovLayer *ml, Region *fence)
     for (axis = 0; axis < 2; axis ++) {
       if ((shapeBoundary.topLeft.axes[axis] < fence->topLeft.axes[axis]) ||
 	  (shapeBoundary.botRight.axes[axis] > fence->botRight.axes[axis]) ) {
+      if ((shapeBoundary.topLeft.axes[0] < fence->topLeft.axes[axis])){
+          p1Score++;
+
+          }
+      if(shapeBoundary.botRight.axes[0] > fence->botRight.axes[axis]){
+          p2Score++;
+
+          }
 	int velocity = ml->velocity.axes[axis] = -ml->velocity.axes[axis];
 	newPos.axes[axis] += (2*velocity);
       }	/**< if outside of fence */
@@ -163,10 +171,6 @@ Region fieldFence;		/**< fence around playing field  */
 //   }
 // }
 
-
-void printScore(char *score, char width){
-  drawString5x7(width,5, score, COLOR_WHITE, COLOR_BLACK);
-}
 /** Initializes everything, enables
  interrupts and green LED,
  *  and handles the rendering for the screen
@@ -189,6 +193,8 @@ void main()
 
   layerGetBounds(&fieldLayer, &fieldFence);
 
+  drawString5x7((screenWidth/2), (screenHeight/2) - 70, p1Score, COLOR_WHITE, COLOR_BLACK);
+  drawString5x7((screenWidth/2), (screenHeight/2) + 70, p2Score, COLOR_WHITE, COLOR_BLACK);
 
   enableWDTInterrupts();      /**< enable periodic interrupt */
   or_sr(0x8);	              /**< GIE (enable interrupts) */
