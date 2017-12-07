@@ -227,6 +227,8 @@ void wdt_c_handler()
     char dir[] = {'0','1','2','3'};
     char tot[] = {dir[p1Score]+dir[p2Score]};
     drawString5x7(60,150, tot, COLOR_RED, COLOR_WHITE);
+    bouncePaddle(&ml3,&ml1);
+    bouncePaddle(&ml3,&ml0);
     u_int switches = p2sw_read(), i;
     char str[5];
     for (i = 0; i < 4; i++){
