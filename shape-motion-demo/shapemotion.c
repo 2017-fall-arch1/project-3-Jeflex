@@ -212,6 +212,7 @@ void wdt_c_handler()
   P1OUT |= GREEN_LED;		      /**< Green LED on when cpu on */
   count ++;
   if (count == 15) {
+    redrawScreen = 1;
     mlAdvance(&ml0, &fieldFence);
     u_int switches = p2sw_read(), i;
     char str[5];
@@ -222,22 +223,18 @@ void wdt_c_handler()
     if(str[0]){
         ml0.velocity.axes[1] = 0;
         ml0.velocity.axes[0] = -3;
-        redrawScreen = 1;
     }
     if(str[1]){
         ml0.velocity.axes[1] = 0;
         ml0.velocity.axes[0] = 3;
-        redrawScreen = 1;
     }
     if(str[2]){
         ml1.velocity.axes[1] = 0;
         ml1.velocity.axes[0] = -3;
-        redrawScreen = 1;
     }
     if(str[3]){
         ml1.velocity.axes[1] = 0;
         ml1.velocity.axes[0] = 3;
-        redrawScreen = 1;
     }
     if(!str[0] && !str[1]){
         ml0.velocity.axes[1] = 0;
