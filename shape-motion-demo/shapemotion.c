@@ -260,6 +260,5 @@ void wdt_c_handler()
     }
     count = 0;
   }
-
   P1OUT &= ~GREEN_LED;		    /**< Green LED off when cpu off */
 }
