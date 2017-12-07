@@ -14,6 +14,7 @@
 #include <shape.h>
 #include <abCircle.h>
 #include "buzzer.h"
+#include <function.c>
 
 #define GREEN_LED BIT6
 
@@ -220,6 +221,13 @@ void wdt_c_handler()
   count ++;
   buzzer_set_period(0);
   if (count == 15) {
+
+    if((p1Score > 2) || (p2Score > 2)){
+      clearScreen(COLOR_BLUE);
+      drawString5x7(20,60, "Point. Game. Set. Match.", COLOR_RED);
+      
+    }
+
     redrawScreen = 1;
     mlAdvance(&ml0, &fieldFence);
     char dir[] = {'0','1','2','3'};
