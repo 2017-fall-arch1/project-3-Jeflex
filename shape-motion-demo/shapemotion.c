@@ -34,7 +34,7 @@ Layer layer3 = {		/**< Layer with an orange circle */
   (AbShape *)&circle4,
   {(screenWidth/2)+10, (screenHeight/2)+5}, /**< bit below & right of center */
   {0,0}, {0,0},				    /* last & next pos */
-  COLOR_BLACK,
+  COLOR_RED,
   0
 };
 
@@ -51,7 +51,7 @@ Layer layer1 = {		/**< Layer with a red square */
   (AbShape *)&paddle,
   {(screenWidth/2), (screenHeight/2) - 64}, /**< center */
   {0,0}, {0,0},				    /* last & next pos */
-  COLOR_ORANGE,
+  COLOR_YELLOW,
   &fieldLayer,
 };
 
@@ -223,11 +223,11 @@ void wdt_c_handler()
         ml0.velocity.axes[1] = 0;
         ml0.velocity.axes[0] = 3;
       }
-    if(~switches & 7){
+    if(~switches & 3){
         ml1.velocity.axes[1] = 0;
         ml1.velocity.axes[0] = -3;
       }
-    if(~switches & 8){
+    if(~switches & 4){
         ml1.velocity.axes[1] = 0;
         ml1.velocity.axes[0] = 3;
       }
@@ -235,7 +235,7 @@ void wdt_c_handler()
         ml0.velocity.axes[1] = 0;
         ml0.velocity.axes[0] = 0;
       }
-    if(!(~switches & 7) && !(~switches & 8)){
+    if(!(~switches & 3) && !(~switches & 4)){
         ml1.velocity.axes[1] = 0;
         ml1.velocity.axes[0] = 0;
       }
