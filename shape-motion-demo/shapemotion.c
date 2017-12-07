@@ -136,11 +136,11 @@ void mlAdvance(MovLayer *ml, Region *fence)
     for (axis = 0; axis < 2; axis ++) {
       if ((shapeBoundary.topLeft.axes[axis] < fence->topLeft.axes[axis]) ||
 	  (shapeBoundary.botRight.axes[axis] > fence->botRight.axes[axis]) ) {
-      if ((shapeBoundary.topLeft.axes[0] < fence->topLeft.axes[axis])){
+      if ((shapeBoundary.top.axes[0] < fence->top.axes[axis])){
           p1Score++;
 
           }
-      if(shapeBoundary.botRight.axes[0] > fence->botRight.axes[axis]){
+      if(shapeBoundary.bottom.axes[0] > fence->bottom.axes[axis]){
           p2Score++;
 
           }
