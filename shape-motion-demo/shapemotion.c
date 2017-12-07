@@ -137,13 +137,20 @@ void mlAdvance(MovLayer *ml, Region *fence)
       if ((shapeBoundary.topLeft.axes[axis] < fence->topLeft.axes[axis]) ||
 	  (shapeBoundary.botRight.axes[axis] > fence->botRight.axes[axis]) ) {
       if ((shapeBoundary.topLeft.axes[1] < fence->topLeft.axes[axis])){
-          p1Score++;
-
+            p1Score++;
           }
       if(shapeBoundary.botRight.axes[1] > fence->botRight.axes[axis]){
-          p2Score++;
-
+            p2Score++;
           }
+          if(abRectCheck(&paddle, &(paddle.pos), &(ml->layer->pos)) && axis == 1){
+
+    	  int velocity = ml->velocity.axes[axis] = -ml->velocity.axes[axis];
+    	  newPos.axes[axis] += (2*velocity);
+    	  buzzer_set_period(4000);
+    	  while(++count < 20000){}
+    	  buzzer_set_period(0);
+    	  count = 0;
+    	}
 	int velocity = ml->velocity.axes[axis] = -ml->velocity.axes[axis];
 	newPos.axes[axis] += (2*velocity);
       }	/**< if outside of fence */
@@ -179,7 +186,7 @@ void main()
 {
   P1DIR |= GREEN_LED;		/**< Green led on when CPU on */
   P1OUT |= GREEN_LED;
-  // buzzer_init();
+  buzzer_init();
   configureClocks();
   lcd_init();
   shapeInit();
@@ -219,7 +226,7 @@ void wdt_c_handler()
     redrawScreen = 1;
     mlAdvance(&ml0, &fieldFence);
     char dir[] = {'0','1','2','3'};
-    char tot[] = {dir[p1Score] + ','+dir[p2Score]};
+    char tot[] = {dir[p1Score]+dir[p2Score]};
     drawString5x7(60,150, tot, COLOR_RED, COLOR_WHITE);
     u_int switches = p2sw_read(), i;
     char str[5];
