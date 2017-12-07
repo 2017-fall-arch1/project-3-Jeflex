@@ -217,15 +217,18 @@ void wdt_c_handler()
     for (i = 0; i < 4; i++){
         str[i] = (switches & (1<<i)) ? 0 : 1;
       }
+
     str[4] = 0;
 
     if(str[0]){
         ml0.velocity.axes[1] = 0;
         ml0.velocity.axes[0] = -5;
+        redrawScreen = 1;
       }
     if(str[1]){
         ml0.velocity.axes[1] = 0;
         ml0.velocity.axes[0] = 5;
+        redrawScreen = 1;
       }
     if(str[2]){
         ml1.velocity.axes[1] = 0;
